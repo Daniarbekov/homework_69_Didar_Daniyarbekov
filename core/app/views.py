@@ -53,3 +53,17 @@ def subtract(request, *args, **kwargs):
             response = JsonResponse({"error": "Incorrect data"})
             response.status_code = 400
         return response
+
+
+def divide(request, *args, **kwargs):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        try:
+            a = float(data.get('A'))
+            b = float(data.get('B'))
+            response = JsonResponse({'answer': round(a / b, 1)})
+        except ValueError:
+            response = JsonResponse({"error": "Incorrect data"}, status=400)
+        except ZeroDivisionError:
+            response = JsonResponse({"error": "Division by zero!"}, status=400)
+        return response

@@ -17,7 +17,7 @@
     <a href="{% url 'add' %}" class="link">Add</a>
     <a href="{% url 'multiply' %}" class="link">multiply</a>
     <a href="{% url 'subtract' %}" class="link">subtract</a>
-    <a href="" class="link">divide</a>
+    <a href="{% url 'divide' %}" class="link">divide</a>
     </div>
     </form>
 </div>
@@ -57,7 +57,7 @@
         let changeClass = function(addClass,removeClass){
             if (!$('.answer').hasClass(addClass)){
                 $('.answer').removeClass(removeClass)
-                $('.answer').toggleClass(addClass)}
+            $('.answer').addClass(addClass)}
         }
     </script>
 </body>

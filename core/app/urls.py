@@ -1,5 +1,6 @@
 from django.urls import path
-from app.views import index, get_token, add, multiply, subtract
+from app.views import index, get_token, add, multiply, subtract, divide
+
 
 urlpatterns = [
     path('', index, name="index"),
@@ -7,4 +8,5 @@ urlpatterns = [
     path("add/", add, name="add" ),
     path("multiply/", multiply, name="multiply" ),
     path("subtract/", subtract, name="subtract" ),
+    path("divide/", divide, name="divide" ),
 ]

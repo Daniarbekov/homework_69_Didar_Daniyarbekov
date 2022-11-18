@@ -14,7 +14,7 @@
     <input id="A">
     <input id="B">
     <div>
-    <a href="" class="link">Add</a>
+    <a href="{% url 'add' %}" class="link">Add</a>
     <a href="" class="link">multiply</a>
     <a href="" class="link">subtract</a>
     <a href="" class="link">divide</a>
@@ -24,6 +24,41 @@
 
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <script>
+        $(".link").click( function(e){
+            e.preventDefault();
+            let number = {
+                
+            }
+            $.ajax({
+                url: $(this).attr('href'),
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': "{{ csrf_token }}",
+                },
+                contentType: 'application/json;',
+                data: JSON.stringify({
+                    'A': $("#A").val(),
+                    'B': $("#B").val(),}),
+                success: function(data){
+                    console.log(data)
+                    console.log(data.status)
+                    $(".answer").html('Answer:' + data.answer)
+                    changeClass('alert-success','alert-danger')
+                },
+                error: function(data){
+                    console.log(data)
+                    $(".answer").html('Error:' + data.responseJSON.error)
+                    changeClass('alert-danger','alert-success')
+                }
+
+            });
+        });
+
+        let changeClass = function(addClass,removeClass){
+            if (!$('.answer').hasClass(addClass)){
+                $('.answer').removeClass(removeClass)
+                $('.answer').toggleClass(addClass)}
+        }
     </script>
 </body>
 </html>
